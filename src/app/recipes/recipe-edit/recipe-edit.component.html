@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="rForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success" [disabled]="!rForm.valid">Save</button>
+          <button type="submit" class="btn btn-danger" (click)="onReset()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">name</label>
+            <input type="text" id="name" formControlName="name" class="form-control">
+            <div *ngIf="rForm.controls['name'].touched && !rForm.controls['name'].valid"><span>name is required</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imagePath">Image URL</label>
+            <input type="text" id="imagePath" formControlName="imagePath" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="rForm.controls['imagePath'].value" class="img-responsive" *ngIf="rForm.controls['imagePath'].value">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">description</label>
+            <textarea type="text" id="description" rows="3" formControlName="description" class="form-control"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-6"> <label>Ingredient</label></div>
+            <div class="col-xs-2"> <label>Amount</label> </div>
+            <div class="col-xs-2"><label>Counter</label></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12" formArrayName="ingredients">
+              <div class="row form-group" *ngFor="let ingredientCtrl of rForm.get('ingredients').controls; let i = index"
+                [formGroupName]="i">
+                <div class="col-xs-6">
+                  <input type="text" class="form-control" formControlName="name">
+                </div>
+                <div class="col-xs-2">
+                  <input type="number" class="form-control" formControlName="amount">
+                </div>
+                <div class="col-xs-2">
+                  <input type="text" class="form-control" formControlName="counter">
+                </div>
+                <div class="col-xs-2">
+                  <button type="button" class="btn btn-danger" (click)="onRemoveIngredient(i)">X</button>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xs-12">
+                  <button type="button" class="btn btn-primary" (click)="onAddIngredient()">Add Ingredient</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

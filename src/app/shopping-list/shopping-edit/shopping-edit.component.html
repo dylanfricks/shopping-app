@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="newIngredient" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" class="form-control" formControlName="name">
+          <div *ngIf="newIngredient.controls['name'].touched && !newIngredient.controls['name'].valid"><span>name is required</span></div>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" class="form-control" formControlName="amount">
+          <div *ngIf="newIngredient.controls['amount'].touched && !newIngredient.controls['amount'].valid"><span>amount is required greater than zero</span></div>
+        </div>
+        <div class="col-sm-2 form-group">
+            <label for="counter">Counter</label>
+            <input type="text" id="counter" class="form-control" formControlName="counter">
+            <div *ngIf="newIngredient.controls['counter'].touched && !newIngredient.controls['counter'].valid"><span>counter type is required (tablespoons, cups, etc.)</span></div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="!newIngredient.valid">{{ editMode ? 'Update' : 'Add' }}</button>
+          <button class="btn btn-danger" type="button" (click)="onDelete()" [disabled]="!editMode">Delete</button>
+          <button class="btn btn-primary" type="button" (click)="onReset()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

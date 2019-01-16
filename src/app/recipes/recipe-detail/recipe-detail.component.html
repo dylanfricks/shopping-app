@@ -1,0 +1,44 @@
+<div class="container" *ngIf="!recipe">Recipe could not load...</div>
+<div class="container" *ngIf="recipe">
+  <div class="row">
+    <div class="col-xs-12">
+      <img [src]="recipe.imagePath" [alt]="recipe.name" class="img-responsive" style="max-height:200px;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>{{recipe.name}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-primary" (click)="onAddToShoppingList()">Add to shopping list</button>
+      <button type="button" class="btn btn-success" [routerLink]="['edit']">Edit Recipe</button>
+      <button type="button" class="btn btn-danger" (click)="onDeleteRecipe()">Delete Recipe</button>
+      <!-- <div class="btn-group">
+              <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="recipe-options"
+                class="btn btn-primary dropdown-toggle">
+                Manage Recipe<span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="recipe-options">
+                <li><a (click)="onAddToShoppingList()">Add to shopping list</a></li>
+                <li><a style="cursor: pointer;" (click)="">Edit Recipe</a></li>
+                <li><a style="cursor: pointer;" (click)="">Delete Recipe</a></li>
+              </ul>
+            </div> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      {{recipe.description}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} -
+          ({{ingredient.amount}} {{ingredient.counter}}) </li>
+      </ul>
+    </div>
+  </div>
+</div>
